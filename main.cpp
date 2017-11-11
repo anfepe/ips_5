@@ -133,31 +133,31 @@ int main()
 
 		InitMatrix( matrix, numb_rows, numb_cols );
 
-        // PrintMatrix( matrix, numb_rows, numb_cols );
-        
-        chrono::high_resolution_clock::time_point t1 = chrono::high_resolution_clock::now();
-        
-        thread first_thr( FindAverageValues, eprocess_type::by_rows, matrix, numb_rows, numb_cols, average_vals_in_rows );
+		// PrintMatrix( matrix, numb_rows, numb_cols );
+		
+		chrono::high_resolution_clock::time_point t1 = chrono::high_resolution_clock::now();
+		
+		thread first_thr( FindAverageValues, eprocess_type::by_rows, matrix, numb_rows, numb_cols, average_vals_in_rows );
 		thread second_thr( FindAverageValues, eprocess_type::by_cols, matrix, numb_rows, numb_cols, average_vals_in_cols );
 
 		first_thr.join();
 		second_thr.join();
-        
-        chrono::high_resolution_clock::time_point t2 = chrono::high_resolution_clock::now();
-        
-        chrono::duration<double> duration = (t2 - t1);
-        printf("\nDuration is: %lf seconds\n", duration.count());
+		
+		chrono::high_resolution_clock::time_point t2 = chrono::high_resolution_clock::now();
+		
+		chrono::duration<double> duration = (t2 - t1);
+		printf("\nDuration is: %lf seconds\n", duration.count());
 
 		// PrintAverageVals( eprocess_type::by_rows, average_vals_in_rows, numb_rows );
-        // PrintAverageVals( eprocess_type::by_cols, average_vals_in_cols, numb_cols );
-        
-        delete [] average_vals_in_cols;
-        delete [] average_vals_in_rows;
-        for ( size_t i = 0; i < numb_rows; ++i )
+		// PrintAverageVals( eprocess_type::by_cols, average_vals_in_cols, numb_cols );
+		
+		delete [] average_vals_in_cols;
+		delete [] average_vals_in_rows;
+		for ( size_t i = 0; i < numb_rows; ++i )
 		{
 			delete [] matrix[i];
-        }
-        delete [] matrix;
+		}
+		delete [] matrix;
 	}
 	catch ( exception& except )
 	{
